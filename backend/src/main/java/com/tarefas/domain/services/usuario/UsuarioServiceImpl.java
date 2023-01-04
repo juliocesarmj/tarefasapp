@@ -20,18 +20,18 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class UsuarioServiceImpl implements UsuarioService {
-	
+
 	private final UsuarioRepository usuarioRepository;
 	private final TokenAuthenticationService tokenAuthenticationService;
-	
+
 	@Override
 	public UsuarioDTO novoUsuario(UsuarioPostDTO dto) {
-		
+
 		Usuario usuario = new Usuario();
 		usuario.setNome(dto.getNome());
 		usuario.setEmail(dto.getEmail());
 		usuario.setSenha(getHashMd5(dto.getSenha()));
-		
+
 		try {
 			usuarioRepository.save(usuario);
 			return new UsuarioDTO(usuario.getNome(), usuario.getEmail());
@@ -39,7 +39,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 			return null;
 		}
 	}
-	
+
 	public static String getHashMd5(String value) {
 		MessageDigest md;
 		try {
@@ -53,16 +53,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public AuthGetDTO auth(AuthPostDTO dto) {
-		Optional<Usuario> usuarioOptional = this.usuarioRepository
-				.findByEmailAndSenha(dto.getEmail(), getHashMd5(dto.getSenha()));
-		
-		if(usuarioOptional.isPresent()) {
-			Usuario usuario = usuarioOptional.get();
-			 return new AuthGetDTO(usuario.getNome(),
-					usuario.getEmail(),
-					this.tokenAuthenticationService.generateToken(usuario.getEmail(), "ROLE_USUARIO"));
-		}
-		
-		throw new IllegalArgumentException("Usuario ou senha inválidos.");
+		Usuario usuario = getUsuario(dto.getEmail(), dto.getSenha());
+		String email = usuario.getEmail();
+		return new AuthGetDTO(usuario.getNome(), email,
+				this.tokenAuthenticationService.generateToken(email, "ROLE_USUARIO"));
+
+	}
+
+	private Usuario getUsuario(String email, String senha) {
+		return this.usuarioRepository.findByEmailAndSenha(email, getHashMd5(senha))
+				.orElseThrow(() -> new IllegalArgumentException("Usuario ou senha inválidos"));
+
 	}
 }
