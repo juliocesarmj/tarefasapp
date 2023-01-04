@@ -1,4 +1,4 @@
-package com.tarefas.domain.infrastructure.security;
+package com.tarefas.infrastructure.security;
 
 import java.io.IOException;
 import java.util.List;

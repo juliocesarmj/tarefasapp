@@ -1,16 +1,15 @@
-package com.tarefas.domain.infrastructure.security;
+package com.tarefas.infrastructure.security;
 
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
-
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Service;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TokenAuthenticationService {

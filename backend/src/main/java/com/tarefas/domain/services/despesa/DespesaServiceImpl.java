@@ -1,19 +1,16 @@
-package com.tarefas.domain.services;
+package com.tarefas.domain.services.despesa;
 
-import java.util.Set;
-
+import com.tarefas.domain.model.Despesa;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import com.tarefas.domain.infrastructure.DespesaRepository;
-import com.tarefas.domain.model.Despesa;
-
-import lombok.RequiredArgsConstructor;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
 public class DespesaServiceImpl implements DespesaService {
 	
-	private final DespesaRepository despesaRepository;
+	private final com.tarefas.domain.infrastructure.DespesaRepository despesaRepository;
 	
 	@Override
 	public Despesa novaDespesa(Despesa despesa) {

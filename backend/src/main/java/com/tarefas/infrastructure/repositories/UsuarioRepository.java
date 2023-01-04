@@ -1,4 +1,4 @@
-package com.tarefas.domain.infrastructure;
+package com.tarefas.infrastructure.repositories;
 
 import java.util.Optional;
 
