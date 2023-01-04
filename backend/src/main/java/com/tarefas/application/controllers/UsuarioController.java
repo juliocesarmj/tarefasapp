@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tarefas.application.dtos.AuthGetDTO;
+import com.tarefas.application.dtos.AuthPostDTO;
 import com.tarefas.application.dtos.UsuarioDTO;
 import com.tarefas.application.dtos.UsuarioPostDTO;
 import com.tarefas.domain.services.usuario.UsuarioService;
@@ -23,5 +25,10 @@ public class UsuarioController {
 	@PostMapping(path = "/novo")
 	public ResponseEntity<UsuarioDTO> novo(@RequestBody final UsuarioPostDTO dto) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(service.novoUsuario(dto));
+	}
+	
+	@PostMapping(path = "/auth")
+	public ResponseEntity<AuthGetDTO> auth(@RequestBody final AuthPostDTO dto) {
+		return ResponseEntity.status(HttpStatus.OK).body(service.auth(dto));
 	}
 }

@@ -20,10 +20,10 @@ public class WebSecurityConfig {
 		http.csrf().disable()
 				.addFilterAfter(new TokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
 				.authorizeRequests().antMatchers(HttpMethod.POST, "/v1/usuario/novo").permitAll()
+				.antMatchers(HttpMethod.POST, "/v1/usuario/auth").permitAll()
 				.antMatchers(HttpMethod.POST, "/v1/tarefas").permitAll().antMatchers(HttpMethod.OPTIONS, "/**")
 				.permitAll().anyRequest().authenticated();
 
 		return http.build();
-
 	}
 }
