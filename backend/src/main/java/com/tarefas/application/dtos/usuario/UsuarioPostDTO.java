@@ -1,4 +1,4 @@
-package com.tarefas.application.dtos;
+package com.tarefas.application.dtos.usuario;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UsuarioDTO {
+public class UsuarioPostDTO {
 	
 	private String nome;
 	private String email;
+	private String senha;
 }

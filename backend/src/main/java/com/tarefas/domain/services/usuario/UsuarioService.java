@@ -1,9 +1,9 @@
 package com.tarefas.domain.services.usuario;
 
-import com.tarefas.application.dtos.AuthGetDTO;
-import com.tarefas.application.dtos.AuthPostDTO;
-import com.tarefas.application.dtos.UsuarioDTO;
-import com.tarefas.application.dtos.UsuarioPostDTO;
+import com.tarefas.application.dtos.authentication.AuthGetDTO;
+import com.tarefas.application.dtos.authentication.AuthPostDTO;
+import com.tarefas.application.dtos.usuario.UsuarioDTO;
+import com.tarefas.application.dtos.usuario.UsuarioPostDTO;
 
 public interface UsuarioService {
 	

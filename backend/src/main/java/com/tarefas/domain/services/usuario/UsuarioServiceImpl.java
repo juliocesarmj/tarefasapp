@@ -1,21 +1,18 @@
 package com.tarefas.domain.services.usuario;
 
+import com.tarefas.application.dtos.authentication.AuthGetDTO;
+import com.tarefas.application.dtos.authentication.AuthPostDTO;
+import com.tarefas.application.dtos.usuario.UsuarioDTO;
+import com.tarefas.application.dtos.usuario.UsuarioPostDTO;
+import com.tarefas.domain.model.Usuario;
+import com.tarefas.infrastructure.repositories.UsuarioRepository;
+import com.tarefas.infrastructure.security.TokenAuthenticationService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Optional;
-
-import org.springframework.stereotype.Service;
-
-import com.tarefas.application.dtos.AuthGetDTO;
-import com.tarefas.application.dtos.AuthPostDTO;
-import com.tarefas.application.dtos.UsuarioDTO;
-import com.tarefas.application.dtos.UsuarioPostDTO;
-import com.tarefas.domain.infrastructure.UsuarioRepository;
-import com.tarefas.domain.infrastructure.security.TokenAuthenticationService;
-import com.tarefas.domain.model.Usuario;
-
-import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor

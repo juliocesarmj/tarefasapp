@@ -1,5 +1,6 @@
-package com.tarefas.application.dtos;
+package com.tarefas.application.dtos.authentication;
 
+import com.tarefas.application.dtos.usuario.UsuarioDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

@@ -13,11 +13,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 
+@Service
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
 	
 	private static final String HEADER = "Authorization";
@@ -68,5 +70,4 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 		String authenticationHeader = request.getHeader(HEADER);
 		return authenticationHeader != null && authenticationHeader.startsWith(PREFIX);
 	}
-
 }

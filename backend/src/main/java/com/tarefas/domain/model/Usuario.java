@@ -18,7 +18,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "usuario")
 public class Usuario extends EntidadeBaseId {

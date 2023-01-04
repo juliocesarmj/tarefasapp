@@ -13,15 +13,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
+import com.tarefas.application.dtos.despesa.DespesaDTO;
 import com.tarefas.domain.enums.TipoDespesa;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.security.core.context.SecurityContext;
 
 @Getter
-@Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Setter(AccessLevel.PROTECTED)
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "despesa")
 public class Despesa extends EntidadeBaseId {
@@ -42,6 +43,8 @@ public class Despesa extends EntidadeBaseId {
 	
 	@Column(nullable = false, updatable = false)
 	private LocalDateTime dataCadastro;
+
+	private boolean recorrente;
 	
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "usuario_id")
@@ -50,5 +53,19 @@ public class Despesa extends EntidadeBaseId {
 	@PrePersist
 	public void aoPersistir() {
 		this.dataCadastro = LocalDateTime.now();
+	}
+
+	public static Despesa novo(DespesaDTO dto) {
+		Despesa despesa = new Despesa();
+		despesa.setTitulo(dto.getTitulo());
+		despesa.setDescricao(dto.getDescricao());
+		despesa.setTipoDespesa(dto.getTipoDespesa());
+		despesa.setDataDespesa(dto.getDataDespesa());
+		despesa.setRecorrente(dto.isRecorrente());
+		return despesa;
+	}
+
+	public void atribuirDespesaUsuario(Usuario usuario){
+		setUsuario(usuario);
 	}
 }

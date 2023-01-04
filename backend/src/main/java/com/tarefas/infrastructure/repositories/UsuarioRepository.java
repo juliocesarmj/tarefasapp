@@ -9,4 +9,6 @@ import com.tarefas.domain.model.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 	
 	Optional<Usuario> findByEmailAndSenha(String email, String senha);
+
+	Optional<Usuario> findByEmail(String email);
 }
