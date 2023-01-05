@@ -2,7 +2,6 @@ package com.tarefas.domain.services.auth;
 
 import com.tarefas.domain.model.Usuario;
 import com.tarefas.infrastructure.repositories.UsuarioRepository;
-import com.tarefas.infrastructure.security.TokenAuthenticationFilter;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
@@ -39,6 +38,5 @@ public class AuthServiceImpl implements AuthService {
     private Usuario getUsuario(String email) {
         return this.usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("Usuario não encontrado"));
-
     }
 }

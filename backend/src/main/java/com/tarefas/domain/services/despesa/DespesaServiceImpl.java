@@ -2,6 +2,7 @@ package com.tarefas.domain.services.despesa;
 
 import com.tarefas.application.dtos.despesa.DespesaDTO;
 import com.tarefas.domain.model.Despesa;
+import com.tarefas.domain.model.Usuario;
 import com.tarefas.domain.services.auth.AuthService;
 import com.tarefas.infrastructure.repositories.DespesaRepository;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -39,15 +41,9 @@ public class DespesaServiceImpl implements DespesaService {
     }
 
     @Override
-    public Set<Despesa> listarDespesas(int usuarioId) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Set<Despesa> todasDespesas() {
-        // TODO Auto-generated method stub
-        return null;
+    public Set<DespesaDTO> todasDespesas(HttpServletRequest request) {
+        Usuario usuario = this.authService.authenticated(request);
+        return despesaRepository.findByUsuario(usuario).stream().map(DespesaDTO::novo).collect(Collectors.toSet());
     }
 
     @Override

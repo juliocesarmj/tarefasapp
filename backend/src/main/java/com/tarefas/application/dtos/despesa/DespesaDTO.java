@@ -1,6 +1,8 @@
 package com.tarefas.application.dtos.despesa;
 
+import com.tarefas.domain.enums.StatusDespesa;
 import com.tarefas.domain.enums.TipoDespesa;
+import com.tarefas.domain.model.Despesa;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,9 +30,23 @@ public class DespesaDTO {
     @NotNull(message = "Campo tipoDespesa é obrigatório.")
     private TipoDespesa tipoDespesa;
 
+    @NotNull(message = "Campo status é obrigatório.")
+    private StatusDespesa statusDespesa;
+
     @NotNull(message = "Campo dataDespesa é obrigatório.")
     private LocalDate dataDespesa;
 
     @NotNull(message = "Campo recorrente é obrigatório.")
     private boolean recorrente;
+
+    public static DespesaDTO novo(Despesa despesa) {
+        return new DespesaDTO(despesa.getTitulo(),
+                despesa.getDescricao(),
+                despesa.getValor(),
+                despesa.getTipoDespesa(),
+                despesa.getStatusDespesa(),
+                despesa.getDataDespesa(),
+                despesa.isRecorrente());
+    }
+
 }

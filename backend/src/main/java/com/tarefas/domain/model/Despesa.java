@@ -14,6 +14,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import com.tarefas.application.dtos.despesa.DespesaDTO;
+import com.tarefas.domain.enums.StatusDespesa;
 import com.tarefas.domain.enums.TipoDespesa;
 
 import lombok.*;
@@ -45,6 +46,10 @@ public class Despesa extends EntidadeBaseId {
 	private LocalDateTime dataCadastro;
 
 	private boolean recorrente;
+
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private StatusDespesa statusDespesa;
 	
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "usuario_id")
@@ -62,6 +67,8 @@ public class Despesa extends EntidadeBaseId {
 		despesa.setTipoDespesa(dto.getTipoDespesa());
 		despesa.setDataDespesa(dto.getDataDespesa());
 		despesa.setRecorrente(dto.isRecorrente());
+		despesa.setValor(dto.getValor());
+		despesa.setStatusDespesa(dto.getStatusDespesa());
 		return despesa;
 	}
 

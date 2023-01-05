@@ -5,13 +5,11 @@ import com.tarefas.domain.services.despesa.DespesaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Set;
 
 @RestController
 @RequestMapping(path = "/v1/despesa")
@@ -23,5 +21,10 @@ public class DespesaController {
     @PostMapping
     public ResponseEntity<DespesaDTO> nova(@RequestBody @Valid DespesaDTO dto, HttpServletRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.novaDespesa(dto, request));
+    }
+
+    @GetMapping
+    public ResponseEntity<Set<DespesaDTO>> consultarDespesas(HttpServletRequest request) {
+        return ResponseEntity.ok(service.todasDespesas(request));
     }
 }

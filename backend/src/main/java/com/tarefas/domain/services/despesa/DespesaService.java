@@ -12,9 +12,7 @@ public interface DespesaService {
 
     Despesa atualizar(final int id, Despesa despesa);
 
-    Set<Despesa> listarDespesas(final int usuarioId);
-
-    Set<Despesa> todasDespesas();
+    Set<DespesaDTO> todasDespesas(HttpServletRequest request);
 
     Despesa findById(final int id);
 
