@@ -1,6 +1,7 @@
 package com.tarefas.application.controllers;
 
 import com.tarefas.application.dtos.despesa.DespesaDTO;
+import com.tarefas.domain.enums.TipoDespesa;
 import com.tarefas.domain.services.despesa.DespesaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,5 +27,10 @@ public class DespesaController {
     @GetMapping
     public ResponseEntity<Set<DespesaDTO>> consultarDespesas(HttpServletRequest request) {
         return ResponseEntity.ok(service.todasDespesas(request));
+    }
+    
+    @GetMapping(path = "/tiposdespesas")
+    public ResponseEntity<TipoDespesa[]> tiposDespesa() {
+        return ResponseEntity.ok(TipoDespesa.values());
     }
 }
