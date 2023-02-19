@@ -3,6 +3,7 @@ package com.tarefas.domain.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,8 +18,11 @@ import com.tarefas.application.dtos.despesa.DespesaDTO;
 import com.tarefas.domain.enums.StatusDespesa;
 import com.tarefas.domain.enums.TipoDespesa;
 
-import lombok.*;
-import org.springframework.security.core.context.SecurityContext;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter(AccessLevel.PROTECTED)
@@ -74,5 +78,30 @@ public class Despesa extends EntidadeBaseId {
 
 	public void atribuirDespesaUsuario(Usuario usuario){
 		setUsuario(usuario);
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(dataCadastro, dataDespesa, descricao, recorrente, statusDespesa,
+				tipoDespesa, titulo, usuario, valor);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Despesa other = (Despesa) obj;
+		return Objects.equals(dataCadastro, other.dataCadastro) && Objects.equals(dataDespesa, other.dataDespesa)
+				&& Objects.equals(descricao, other.descricao) && recorrente == other.recorrente
+				&& statusDespesa == other.statusDespesa && tipoDespesa == other.tipoDespesa
+				&& Objects.equals(titulo, other.titulo) && Objects.equals(usuario, other.usuario)
+				&& Objects.equals(valor, other.valor);
 	}
 }

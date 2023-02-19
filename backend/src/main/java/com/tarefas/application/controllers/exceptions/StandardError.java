@@ -10,7 +10,7 @@ import java.util.Map;
 @Builder
 public class StandardError {
 
-    private LocalDateTime timestamp;
+    private long timestamp;
     private int status;
     private String erro;
     private String path;
