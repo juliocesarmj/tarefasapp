@@ -3,6 +3,7 @@ package com.br.tarefas.api.controllers.handlers;
 import com.br.tarefas.domain.service.exceptions.EntityExistsException;
 import com.br.tarefas.domain.service.exceptions.NotFoundException;
 import com.br.tarefas.infrastructure.security.exceptions.SecurityAppException;
+import io.jsonwebtoken.MalformedJwtException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,5 +57,4 @@ public class UsuarioHandlerController {
                 .path(req.getRequestURI())
                 .build());
     }
-
 }

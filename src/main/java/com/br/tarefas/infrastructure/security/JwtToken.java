@@ -33,8 +33,7 @@ public class JwtToken {
             }
         }
         try {
-            this.claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
-
+            this.claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(this.token).getBody();
         } catch (JwtException | IllegalArgumentException e) {
             throw new IllegalArgumentException("Erro ao decifrar token. " + e.getMessage());
         }

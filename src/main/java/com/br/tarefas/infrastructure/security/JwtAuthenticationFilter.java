@@ -3,6 +3,7 @@ package com.br.tarefas.infrastructure.security;
 import com.br.tarefas.infrastructure.security.exceptions.SecurityAppException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
@@ -41,9 +42,13 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
             String jwtSecret = environment.getProperty("jwt.secret");
 
             final String token = authHeader.substring(7);
-            Claims claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
-            request.setAttribute("claims", claims);
-            filterChain.doFilter(request, response);
+            try {
+                Claims claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
+                request.setAttribute("claims", claims);
+                filterChain.doFilter(request, response);
+            } catch (MalformedJwtException e) {
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+            }
         }
     }
 }
